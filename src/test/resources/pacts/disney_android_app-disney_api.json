@@ -1,0 +1,174 @@
+{
+  "consumer": {
+    "name": "disney_android_app"
+  },
+  "interactions": [
+    {
+      "description": "a request to retrieve character with id 112",
+      "key": "c8cc7ba2",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "a disney character with id 112 exists"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/character/112"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "_id": 112,
+            "imageUrl": "https://example.com/mickey.png",
+            "name": "Mickey Mouse"
+          },
+          "contentType": "application/json; charset=UTF-8",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$._id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.imageUrl": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    },
+    {
+      "description": "a request to retrieve all characters",
+      "key": "5181e6ac",
+      "pending": false,
+      "providerStates": [
+        {
+          "name": "a list of Disney characters exists"
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "path": "/character"
+      },
+      "response": {
+        "body": {
+          "content": {
+            "data": [
+              {
+                "_id": 112,
+                "imageUrl": "https://example.com/mickey.png",
+                "name": "Mickey Mouse"
+              }
+            ]
+          },
+          "contentType": "application/json; charset=UTF-8",
+          "encoded": false
+        },
+        "headers": {
+          "Content-Type": [
+            "application/json; charset=UTF-8"
+          ]
+        },
+        "matchingRules": {
+          "body": {
+            "$.data": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.data[*]._id": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "integer"
+                }
+              ]
+            },
+            "$.data[*].imageUrl": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            },
+            "$.data[*].name": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "type"
+                }
+              ]
+            }
+          },
+          "header": {
+            "Content-Type": {
+              "combine": "AND",
+              "matchers": [
+                {
+                  "match": "regex",
+                  "regex": "application/json(;\\s?charset=[\\w\\-]+)?"
+                }
+              ]
+            }
+          }
+        },
+        "status": 200
+      },
+      "transport": "http",
+      "type": "Synchronous/HTTP"
+    }
+  ],
+  "metadata": {
+    "pact-jvm": {
+      "version": "4.6.20"
+    },
+    "pactSpecification": {
+      "version": "4.0"
+    }
+  },
+  "provider": {
+    "name": "disney_api"
+  }
+}
