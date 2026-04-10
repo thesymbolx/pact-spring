@@ -8,12 +8,20 @@ import org.junit.jupiter.api.TestTemplate
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.context.SpringBootTest
 import au.com.dius.pact.provider.junitsupport.State
+import au.com.dius.pact.provider.junitsupport.loader.PactBroker
+import au.com.dius.pact.provider.junitsupport.loader.PactBrokerAuth
 import org.springframework.beans.factory.annotation.Autowired
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @Provider("disney_api")
-@PactFolder("src/test/resources/pacts")
+//@PactFolder("src/test/resources/pacts")
+@PactBroker(
+	url = "https://yorkshire-building-society.pactflow.io",
+	enablePendingPacts = "true",
+	providerBranch = "main",
+	authentication = PactBrokerAuth(token = "k0xg2l3mRoGHrCo0vAPWUQ")
+)
 class PactSpringApplicationTests {
 
 	@Autowired

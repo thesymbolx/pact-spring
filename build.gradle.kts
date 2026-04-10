@@ -37,3 +37,19 @@ kotlin {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+
+tasks.withType<Test> {
+	useJUnitPlatform()
+
+	// Provide the version of this provider (e.g., 0.0.1-SNAPSHOT)
+	systemProperty("pact.provider.version", project.version.toString())
+
+	// Enable publishing results back to Pactflow
+	systemProperty("pact.verifier.publishResults", "true")
+
+	// Hardcode the branch to main for verification results
+	systemProperty("pact.provider.branch", "main")
+
+	// Ensure the token from your environment is accessible to the test
+	systemProperty("PACT_BROKER_TOKEN", "k0xg2l3mRoGHrCo0vAPWUQ")
+}
